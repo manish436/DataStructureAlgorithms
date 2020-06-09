@@ -49,6 +49,7 @@ public class Problems
         return newName.reverse().toString();
     }
 
+
     public static int[] intersectOld(int[] nums1, int[] nums2)
     {
 
@@ -73,6 +74,7 @@ public class Problems
             .mapToInt(Integer::intValue)
             .toArray();
     }
+
 
     private static boolean containsOnlyDigits(String name)
     {
@@ -136,7 +138,8 @@ public class Problems
 
         return result.stream().mapToInt(i -> i).toArray();
     }
-    
+
+
     public static void rotate(int[] nums, int k)
     {
         for (int i = 0; i < k; i++)
@@ -154,7 +157,8 @@ public class Problems
         }
 
     }
-    
+
+
     public static int[] intersectStream(int[] nums1, int[] nums2)
     {
 
@@ -259,6 +263,90 @@ public class Problems
     }
 
 
+    public static int findFirstOccurrence(int[] A, int x)
+    {
+        int result = -1;
+        int left = 0;
+        int right = A.length - 1;
+        int mid;
+
+        while (left <= right)
+        {
+            mid = (left + right)/2;
+            if (A[mid] == x)
+            {
+                result = mid;
+                right = mid - 1;
+            }
+
+            if (A[mid] < x)
+            {
+                //go to right part
+                left = mid + 1;
+            }
+            else if (A[mid] > x)
+            {
+                right = mid - 1;
+            }
+        }
+
+        //brute force approach
+//        for (int i = 0; i < A.length; i++)
+//        {
+//            if (A[i] == x)
+//            {
+//                result = i;
+//                break;
+//            }
+//
+//        }
+
+        return result;
+    }
+
+
+    public static int findLastOccurrence(int[] A, int x)
+    {
+        int result = -1;
+        int left = 0;
+        int right = A.length - 1;
+        int mid;
+
+        while (left <= right)
+        {
+            mid = (left + right)/2;
+            if (A[mid] == x)
+            {
+                result = mid;
+                left = mid + 1;
+            }
+
+            if (A[mid] < x)
+            {
+                //go to right part
+                left = mid + 1;
+            }
+            else if (A[mid] > x)
+            {
+                right = mid - 1;
+            }
+        }
+
+        //brute force approach
+//        for (int i = A.length-1; i >= 0; i--)
+//        {
+//            if (A[i] == x)
+//            {
+//                result = i;
+//                break;
+//            }
+//
+//        }
+
+        return result;
+    }
+
+
     public static void main(String[] args)
     {
 
@@ -318,6 +406,25 @@ public class Problems
 
         //        Problems main = new Problems();
         //        main.start();
+
+        int[] A = {2, 5, 5, 5, 6, 6, 8, 9, 9, 9};
+        int key = 5;
+
+        int index = findLastOccurrence(A, key);
+
+        if (index != -1)
+        {
+            System.out
+                .println(
+                    "First occurrence of element "
+                        + key +
+                        " is found at index " + index);
+        }
+        else
+        {
+            System.out.println("Element not found in the array");
+        }
+
     }
-   
+
 }
